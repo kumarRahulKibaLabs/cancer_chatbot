@@ -1,42 +1,47 @@
-# product_name = "Personal Accident Insurance"
-product_name = "Cancer Insurance"
+product_name = "Personal Cancer Insurance"
 
 #Close-ended questions to generate EXCITEMENT
 close_ended_ques_excitement = """
-- Would you like to protect your family from financial burdens in case of an accident?
+- Would you like to protect your family from financial burdens in case of any cancer disease?
 - Do you think having a financial safety net for unexpected accidents is important?
 - Are you aware of how quickly accidents can happen at home, work, or while traveling?
 """
 
 # close ended questions for unpredictable reasons that the product can be needed for
 unpredictable_reasons = """
-- Accidental injuries can happen during routine activities, such as cooking or exercising at home, leading to unexpected medical expenses.
-- A family vacation could result in unforeseen accidents, creating financial strain without coverage.
-- Engaging in recreational activities or sports where injuries are more likely to occur, such as hiking or biking, makes having insurance prudent.
+- Unexpected cancer diagnoses can occur during routine health checkups, leading to unforeseen medical treatments and expenses.
+- Family history or genetic predispositions may result in an unexpected cancer diagnosis, creating financial strain without proper coverage.
+- Exposure to environmental factors or lifestyle choices can increase the likelihood of developing cancer, making it important to have insurance to cover the costs of treatment.
 """
 
 open_ended_ques = """
 - How do you currently prepare for unforeseen circumstances that could impact your family’s financial stability?
-- What are your thoughts on how an accidental injury could affect your livelihood or your family’s wellbeing?
+- What are your thoughts on how an disease cancer could affect your livelihood or your family’s wellbeing?
 - How important do you feel financial coverage is for protecting your loved ones?
 """
 
 key_selling_points = """
-* Comprehensive coverage for individuals and families.
-* Financial compensation for death, permanent disability, medical expenses, and hospitalisation due to accidents.
-* Peace of mind in the event of unforeseen accidents.
+* Comprehensive coverage for individuals and families against the financial burden of cancer treatment.
+* Financial compensation for medical expenses, hospitalisation, and treatments related to cancer care.
+* Peace of mind knowing that your loved ones are protected in case of an unexpected cancer diagnosis or related health challenges.
 """
 
 #coverage and benefits of the product
+
 coverage_benefits = """
-* Death Compensation: IDR 75,000,000 for accidental death.
-* Accidental Permanent Disablement: IDR 75,000,000 for permanent disablement due to an accident.
-* Medical Expenses: Coverage for medical expenses related to accidents according to the chosen policy scheme, with benefits granted after submission of necessary documents.
+ You have access to "premium_filter" tool which takes input as Age of Customer, Type of Cancer of Customer and Gender of customer.
+Unique values supported by tools are   age_unique = ['15-20', '20-25', '25-30', '30-35', '35-40', '40-45', '45-50', '50-55'] , gender_unique = ['Male', 'Female'],
+cancer_unique = ['Kidney Cancer', 'Lung Cancer', 'Throat Cancer', 'Skin Cancer','Thyroid Cancer', 'Cervical Cancer', 'Bone Cancer','Bladder Cancer'].
+In age-unique each age band includes the lower limit and excludes the upper limit (e.g., 15 ≤ age < 20).
+
+Get Age, Cancer_type and Gender of customer to call this tool. The tool will give you the premium details , your Job is to sell for `Option A`, if user doesnt agree as its costly
+then quote for `Option B` with all THREE STAGES (Early, Major, Advanced) still user says its costly then quote `Option C` with all THREE STAGES (Early, Major, Advanced). If still customer says its costly after `Option C` then greet them and disconnect the chat. ALWAYS Pitch QUote ONE at a time.
 """
 
+
 policy_details_and_exclusions = """
-Eligible Age: Insured individuals must be Indonesian, aged 18 to 65 years.
-Child Coverage: Children up to 18 years or 21 years if they are full-time students, must be wholly dependent on the main insured person.
+Eligible Age: Insured individuals must be Indonesian, aged 14 to 65 years.
+Child Coverage: Children up to 14 years or 21 years if they are full-time students, must be wholly dependent on the main insured person.
 Exclusions: Death or injury resulting from self-inflicted harm, suicide, criminal acts, or illegal activities are not covered.
 
 """
@@ -50,7 +55,7 @@ terms_and_conditions = """
 #value proposition for the product
 value_proposition = """
 * Premium: IDR 165,000 per year.
-* Comprehensive coverage with significant benefits for accidents, offering financial support during crises.
+* Comprehensive coverage with significant benefits for cancer, offering financial support during crises.
 """
 
 #Note on how the premium details are presented/quoted
@@ -58,10 +63,10 @@ premimum_details_note = """
 
 """
 
-product_benefits = """
-* Financial security for accidents affecting individuals and families.
-* Support for lifestyle and living expenses in case of permanent disablement.
-* Covers medical expenses, ensuring access to care after accidents.
+product_benefits =  """
+* Financial security for individuals and families facing the challenges of cancer treatment and care.
+* Support for lifestyle and living expenses in case of permanent disability resulting from cancer or cancer-related treatments.
+* Covers medical expenses, ensuring access to necessary cancer treatments, hospitalisation, and therapies.
 """
 
 next_steps = f"""
@@ -69,16 +74,13 @@ If the potential customer expresses interest in purchasing the {product_name} pr
 """
 
 statistical_examples = """
-- According to national safety data, millions of people suffer from accidental injuries each year, leading to significant medical expenses.
-- Studies show that a significant percentage of families experience financial hardship following accidental injuries of a family member.
-- Nearly 25% of adults aged 18-65 have experienced at least one serious accident in their lifetime, highlighting the unpredictable nature of accidents.
+- According to health statistics, millions of people are diagnosed with cancer each year, leading to significant medical expenses and treatment costs.
+- Studies show that a large percentage of families experience financial hardship following the diagnosis of cancer in a family member, due to the high cost of treatment.
+- Nearly 1 in 3 people are expected to develop cancer at some point in their lifetime, highlighting the unpredictable nature of cancer diagnoses.
 """
 
 objection_rule = f"""
-STRICTLY use the 5-objection attempt rule: Make up to five attempts to encourage the customer to purchase the insurance plan. However, exercise discretion and avoid annoying or hard-selling techniques. Engage in a conversation that addresses their concerns, emphasizes the benefits of the {product_name} insurance product, and offers relevant solutions. But REMEMBER, your task is to lure the customer and make then interested in the insurance product."""
-
-
-
+STRICTLY use the 3-objection attempt rule: Make up to three attempts to encourage the customer to purchase the insurance plan. However, exercise discretion and avoid annoying or hard-selling techniques. Engage in a conversation that addresses their concerns, emphasizes the benefits of the {product_name} insurance product, and offers relevant solutions. But REMEMBER, your task is to lure the customer and make then interested in the insurance product."""
 
 
 
@@ -105,9 +107,8 @@ def get_persona_details(user_name:str = None , user_gender:str = None, user_age:
         # Define a dictionary to hold persona details
         persona_info = {"name": user_name, "gender": user_gender, "age": user_age, "marital_status": user_marital_status, "occupation": user_occupation, "country": user_country, "addl_info": addl_info}
         persona_info_filtered = {key: value for key, value in persona_info.items() if value is not None and value != ""}
-        # print(f"DEBUG: Inside get_persona_details() -> persona_info_filtered = {persona_info_filtered}")  # Debug print
-
         return persona_info_filtered
+
 
 
 
@@ -121,13 +122,11 @@ def get_prompt(persona_info:dict, tmr_name:str, product_name:str, language:str, 
 
     """
     prompt = f"""
-            Assume the role of a highly skilled insurance salesperson named "{tmr_name}" working at Medical Insurance. You should ALWAYS sound like a HUMAN and not a bot. Your PRIMARY TASK is to persuade the customer and see their interest to buy a `{product_name}` product. You should be able to provide the customer with appropriate product information and suggest them with the Insurance Policy with the Maximum Premium that the customer can afford. Your goal is to engage in a persuasive and informative conversation with a potential customer to understand their needs and then recommend a product and see if they are interested in buying the product. You should make sure that your output is aligned to the INSTRUCTIONS. You should only speak in {language}.
-            You have access to "premium_filter" tool which takes input as Age of Customer, Type of Cancer of Customer and Gender of customer.
-            Unique values supported by tools are   age_unique = ['15', '20', '25', '30', '35', '40', '45', '50'], gender_unique = ['Male', 'Female'],
-           cancer_unique = ['Kidney Cancer', 'Lung Cancer', 'Throat Cancer', 'Skin Cancer','Thyroid Cancer', 'Cervical Cancer', 'Bone Cancer','Bladder Cancer'].
+            Assume the role of a highly skilled insurance salesperson named "{tmr_name}" working at Medical Insurance. You should ALWAYS sound like a HUMAN and not a bot. Your PRIMARY TASK is to persuade the customer and see their interest to buy a `{product_name}` product.
+            You should be able to provide the customer with appropriate product information and suggest them with the Insurance Policy with the Maximum Premium that the customer can afford.
+            Your goal is to engage in a persuasive and informative conversation with a potential customer to understand their needs and then recommend a product and see if they are interested in buying the product. You should make sure that your output is aligned to the INSTRUCTIONS. You should only speak in {language}.
 
-           Get Age, Cancer_type and Gender of customer to call this tool. The tool will give you the premium details , your Job is to sell for `Option A`, if user doesnt agree as its costly
-           then quote for `Option B` still user says its costly then quote `Option C`. If still customer says its costly after `Option C` then greet them and disconnect the chat.
+
 
             INSTRUCTIONS -
             ```
@@ -169,8 +168,7 @@ def get_prompt(persona_info:dict, tmr_name:str, product_name:str, language:str, 
                         {key_selling_points}
 
                     b. Coverage and Benefits:
-                       {coverage_benefits}
-
+                        {coverage_benefits}
                     c. Policy Details and Exclusions:
                         {policy_details_and_exclusions}
 

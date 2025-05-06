@@ -63,7 +63,7 @@ async def websocket_chat(websocket: WebSocket):
 
 async def _process_message(app, user_input: str, websocket: WebSocket, config: dict) -> None:
     """Process a single user message and stream responses."""
-    async for event in app.astream(  # Changed from app.stream to app.astream
+    async for event in app.astream(
         {"messages": [("user", user_input)]},
         config,
         stream_mode="values"
@@ -72,11 +72,13 @@ async def _process_message(app, user_input: str, websocket: WebSocket, config: d
         
         if isinstance(last_message, AIMessage):
             if last_message.tool_calls:
-                await websocket.send_text("Processing with tools...")
+                # Don't send tool processing messages to the user
+                pass
             elif last_message.response_metadata.get('finish_reason') == 'stop':
                 await websocket.send_text(last_message.content)
         elif isinstance(last_message, ToolMessage):
-            await websocket.send_text(f"Tool result: {last_message.content}")
+            # Don't send tool results directly to the user
+            pass
 
 async def _handle_disconnect(websocket: WebSocket) -> None:
     """Handle WebSocket disconnection gracefully."""
